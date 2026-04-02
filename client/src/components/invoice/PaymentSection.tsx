@@ -57,15 +57,15 @@ export default function PaymentSection({ invoiceId, invoiceTotal, payments, tota
   }
 
   return (
-    <div className="no-print bg-white rounded-xl border border-gray-200 p-4 sm:p-6 md:p-10 mt-4">
+    <div className="no-print bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 sm:p-6 md:p-10 mt-4">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
           <CreditCard size={20} className="text-gray-400" /> Payments
         </h2>
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
-            className="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+            className="flex items-center gap-1 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium"
           >
             <Plus size={16} /> Add Payment
           </button>
@@ -74,17 +74,17 @@ export default function PaymentSection({ invoiceId, invoiceTotal, payments, tota
 
       {/* Summary bar */}
       <div className="grid grid-cols-3 gap-3 mb-4">
-        <div className="bg-gray-50 rounded-lg p-3 text-center">
-          <p className="text-xs text-gray-500">Total</p>
+        <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3 text-center">
+          <p className="text-xs text-gray-500 dark:text-gray-400">Total</p>
           <p className="text-sm font-semibold">{formatCurrency(invoiceTotal)}</p>
         </div>
-        <div className="bg-green-50 rounded-lg p-3 text-center">
-          <p className="text-xs text-green-600">Paid</p>
-          <p className="text-sm font-semibold text-green-700">{formatCurrency(totalPaid)}</p>
+        <div className="bg-green-50 dark:bg-green-900/30 rounded-lg p-3 text-center">
+          <p className="text-xs text-green-600 dark:text-green-400">Paid</p>
+          <p className="text-sm font-semibold text-green-700 dark:text-green-400">{formatCurrency(totalPaid)}</p>
         </div>
-        <div className={`rounded-lg p-3 text-center ${remaining > 0 ? 'bg-red-50' : 'bg-green-50'}`}>
-          <p className={`text-xs ${remaining > 0 ? 'text-red-600' : 'text-green-600'}`}>Remaining</p>
-          <p className={`text-sm font-semibold ${remaining > 0 ? 'text-red-700' : 'text-green-700'}`}>{formatCurrency(remaining)}</p>
+        <div className={`rounded-lg p-3 text-center ${remaining > 0 ? 'bg-red-50 dark:bg-red-900/30' : 'bg-green-50 dark:bg-green-900/30'}`}>
+          <p className={`text-xs ${remaining > 0 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>Remaining</p>
+          <p className={`text-sm font-semibold ${remaining > 0 ? 'text-red-700 dark:text-red-400' : 'text-green-700 dark:text-green-400'}`}>{formatCurrency(remaining)}</p>
         </div>
       </div>
 
@@ -92,20 +92,20 @@ export default function PaymentSection({ invoiceId, invoiceTotal, payments, tota
       {payments.length > 0 && (
         <div className="space-y-2 mb-4">
           {payments.map((p) => (
-            <div key={p.id} className="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2">
+            <div key={p.id} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700/50 rounded-lg px-3 py-2">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="inline-block px-2 py-0.5 bg-indigo-50 text-indigo-600 text-xs font-medium rounded">
+                  <span className="inline-block px-2 py-0.5 bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 text-xs font-medium rounded">
                     {p.method}
                   </span>
                   <span className="text-sm font-semibold">{formatCurrency(p.amount)}</span>
-                  <span className="text-xs text-gray-400">{formatDate(p.paid_at)}</span>
+                  <span className="text-xs text-gray-400 dark:text-gray-500">{formatDate(p.paid_at)}</span>
                 </div>
-                {p.note && <p className="text-xs text-gray-500 mt-0.5 truncate">{p.note}</p>}
+                {p.note && <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">{p.note}</p>}
               </div>
               <button
                 onClick={() => handleDelete(p.id)}
-                className="p-1.5 hover:bg-red-50 rounded text-gray-400 hover:text-red-500 shrink-0 ml-2"
+                className="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/30 rounded text-gray-400 hover:text-red-500 shrink-0 ml-2"
               >
                 <Trash2 size={14} />
               </button>
@@ -115,19 +115,19 @@ export default function PaymentSection({ invoiceId, invoiceTotal, payments, tota
       )}
 
       {payments.length === 0 && !showForm && (
-        <p className="text-sm text-gray-400 text-center py-3">No payments recorded yet.</p>
+        <p className="text-sm text-gray-400 dark:text-gray-500 text-center py-3">No payments recorded yet.</p>
       )}
 
       {/* Add payment form */}
       {showForm && (
-        <form onSubmit={handleAdd} className="border border-gray-200 rounded-lg p-4 space-y-3">
+        <form onSubmit={handleAdd} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 space-y-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Method</label>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Method</label>
               <select
                 value={method}
                 onChange={(e) => setMethod(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 {paymentMethods.map((m) => (
                   <option key={m} value={m}>{m}</option>
@@ -135,7 +135,7 @@ export default function PaymentSection({ invoiceId, invoiceTotal, payments, tota
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Amount</label>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Amount</label>
               <input
                 type="number"
                 required
@@ -144,26 +144,26 @@ export default function PaymentSection({ invoiceId, invoiceTotal, payments, tota
                 value={amount}
                 onChange={(e) => setAmount(parseFloat(e.target.value) || '')}
                 placeholder={remaining > 0 ? `Max: ${remaining.toLocaleString()}` : '0'}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Date</label>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Date</label>
               <input
                 type="date"
                 value={paidAt}
                 onChange={(e) => setPaidAt(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Note (optional)</label>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Note (optional)</label>
               <input
                 type="text"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
                 placeholder="e.g. Deposit, COD balance"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
           </div>
@@ -171,7 +171,7 @@ export default function PaymentSection({ invoiceId, invoiceTotal, payments, tota
             <button
               type="button"
               onClick={() => setShowForm(false)}
-              className="px-4 py-1.5 text-sm border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50"
+              className="px-4 py-1.5 text-sm border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
             >
               Cancel
             </button>

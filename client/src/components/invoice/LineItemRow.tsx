@@ -14,14 +14,14 @@ export default function LineItemRow({ item, index, onChange, onRemove, canRemove
   return (
     <>
       {/* Desktop row */}
-      <tr className="hidden md:table-row border-b border-gray-100">
+      <tr className="hidden md:table-row border-b border-gray-100 dark:border-gray-700">
         <td className="p-2">
           <input
             type="text"
             required
             value={item.description}
             onChange={(e) => onChange(index, 'description', e.target.value)}
-            className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             placeholder="Item description"
           />
         </td>
@@ -33,7 +33,7 @@ export default function LineItemRow({ item, index, onChange, onRemove, canRemove
             step="any"
             value={item.quantity || ''}
             onChange={(e) => onChange(index, 'quantity', parseFloat(e.target.value) || 0)}
-            className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm text-right focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-sm text-right bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           />
         </td>
         <td className="p-2 w-32">
@@ -44,13 +44,13 @@ export default function LineItemRow({ item, index, onChange, onRemove, canRemove
             step="any"
             value={item.unit_price || ''}
             onChange={(e) => onChange(index, 'unit_price', parseFloat(e.target.value) || 0)}
-            className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm text-right focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-sm text-right bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           />
         </td>
         <td className="p-2 w-28 text-right text-sm font-medium">{formatCurrency(item.quantity * item.unit_price)}</td>
         <td className="p-2 w-10">
           {canRemove && (
-            <button type="button" onClick={() => onRemove(index)} className="p-1 hover:bg-red-50 rounded text-gray-400 hover:text-red-500">
+            <button type="button" onClick={() => onRemove(index)} className="p-1 hover:bg-red-50 dark:hover:bg-red-900/30 rounded text-gray-400 hover:text-red-500">
               <Trash2 size={15} />
             </button>
           )}
@@ -58,11 +58,11 @@ export default function LineItemRow({ item, index, onChange, onRemove, canRemove
       </tr>
 
       {/* Mobile card */}
-      <div className="md:hidden bg-gray-50 rounded-lg p-3 space-y-2">
+      <div className="md:hidden bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3 space-y-2">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-medium text-gray-500">Item {index + 1}</span>
+          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Item {index + 1}</span>
           {canRemove && (
-            <button type="button" onClick={() => onRemove(index)} className="p-1 hover:bg-red-50 rounded text-gray-400 hover:text-red-500">
+            <button type="button" onClick={() => onRemove(index)} className="p-1 hover:bg-red-50 dark:hover:bg-red-900/30 rounded text-gray-400 hover:text-red-500">
               <Trash2 size={14} />
             </button>
           )}
@@ -72,12 +72,12 @@ export default function LineItemRow({ item, index, onChange, onRemove, canRemove
           required
           value={item.description}
           onChange={(e) => onChange(index, 'description', e.target.value)}
-          className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="w-full px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           placeholder="Description"
         />
         <div className="grid grid-cols-3 gap-2">
           <div>
-            <label className="text-xs text-gray-500">Qty</label>
+            <label className="text-xs text-gray-500 dark:text-gray-400">Qty</label>
             <input
               type="number"
               required
@@ -85,11 +85,11 @@ export default function LineItemRow({ item, index, onChange, onRemove, canRemove
               step="any"
               value={item.quantity || ''}
               onChange={(e) => onChange(index, 'quantity', parseFloat(e.target.value) || 0)}
-              className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="text-xs text-gray-500">Price</label>
+            <label className="text-xs text-gray-500 dark:text-gray-400">Price</label>
             <input
               type="number"
               required
@@ -97,11 +97,11 @@ export default function LineItemRow({ item, index, onChange, onRemove, canRemove
               step="any"
               value={item.unit_price || ''}
               onChange={(e) => onChange(index, 'unit_price', parseFloat(e.target.value) || 0)}
-              className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="text-xs text-gray-500">Amount</label>
+            <label className="text-xs text-gray-500 dark:text-gray-400">Amount</label>
             <p className="px-2 py-1.5 text-sm font-medium">{formatCurrency(item.quantity * item.unit_price)}</p>
           </div>
         </div>

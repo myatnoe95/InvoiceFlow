@@ -9,12 +9,12 @@ import { exportToExcel, exportToCSV } from '../utils/exportReport';
 import api from '../api/client';
 
 const statusColors: Record<string, string> = {
-  draft: 'bg-gray-100 text-gray-700',
-  sent: 'bg-blue-100 text-blue-700',
-  paid: 'bg-green-100 text-green-700',
-  overdue: 'bg-red-100 text-red-700',
-  cod: 'bg-amber-100 text-amber-700',
-  partial: 'bg-purple-100 text-purple-700',
+  draft: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300',
+  sent: 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300',
+  paid: 'bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300',
+  overdue: 'bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-300',
+  cod: 'bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300',
+  partial: 'bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300',
 };
 
 const statuses = ['all', 'draft', 'sent', 'partial', 'paid', 'cod', 'overdue'];
@@ -85,30 +85,30 @@ export default function InvoiceList() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Invoices</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Invoices</h1>
         <div className="flex items-center gap-2">
           {/* Export dropdown */}
           <div className="relative">
             <button
               onClick={() => setShowExportMenu(!showExportMenu)}
               disabled={exporting}
-              className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 disabled:opacity-50"
+              className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50"
             >
               <Download size={16} /> {exporting ? 'Exporting...' : 'Export'}
             </button>
             {showExportMenu && (
               <>
                 <div className="fixed inset-0 z-10" onClick={() => setShowExportMenu(false)} />
-                <div className="absolute right-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-20 py-1">
+                <div className="absolute right-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-20 py-1">
                   <button
                     onClick={() => handleExport('excel')}
-                    className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
                   >
                     <FileSpreadsheet size={16} className="text-green-600" /> Export as Excel
                   </button>
                   <button
                     onClick={() => handleExport('csv')}
-                    className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
                   >
                     <FileText size={16} className="text-blue-600" /> Export as CSV
                   </button>
@@ -126,7 +126,7 @@ export default function InvoiceList() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 mb-4">
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
             <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -135,13 +135,13 @@ export default function InvoiceList() {
               placeholder="Search by customer or invoice #..."
               value={search}
               onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-              className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full pl-9 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <select
             value={shopId || ''}
             onChange={(e) => { setShopId(e.target.value ? Number(e.target.value) : undefined); setPage(1); }}
-            className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             <option value="">All Shops</option>
             {shops?.map((s) => (
@@ -155,7 +155,9 @@ export default function InvoiceList() {
               key={s}
               onClick={() => { setStatus(s); setPage(1); }}
               className={`px-3 py-1.5 rounded-full text-xs font-medium capitalize transition-colors ${
-                status === s ? 'bg-indigo-100 text-indigo-700' : 'text-gray-500 hover:bg-gray-100'
+                status === s
+                  ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300'
+                  : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700'
               }`}
             >
               {s}
@@ -165,13 +167,13 @@ export default function InvoiceList() {
       </div>
 
       {/* Invoice Table */}
-      <div className="bg-white rounded-xl border border-gray-200">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
         {isLoading ? (
-          <div className="p-8 text-center text-gray-500">Loading...</div>
+          <div className="p-8 text-center text-gray-500 dark:text-gray-400">Loading...</div>
         ) : !data?.invoices.length ? (
-          <div className="p-8 text-center text-gray-500">
+          <div className="p-8 text-center text-gray-500 dark:text-gray-400">
             No invoices found.{' '}
-            <Link to="/invoices/new" className="text-indigo-600 hover:underline">Create one</Link>
+            <Link to="/invoices/new" className="text-indigo-600 dark:text-indigo-400 hover:underline">Create one</Link>
           </div>
         ) : (
           <>
@@ -179,27 +181,27 @@ export default function InvoiceList() {
             <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-gray-100">
-                    <th className="text-left p-3 font-medium text-gray-500">Invoice #</th>
-                    <th className="text-left p-3 font-medium text-gray-500">Shop</th>
-                    <th className="text-left p-3 font-medium text-gray-500">Customer</th>
-                    <th className="text-left p-3 font-medium text-gray-500">Date</th>
-                    <th className="text-right p-3 font-medium text-gray-500">Total</th>
-                    <th className="text-center p-3 font-medium text-gray-500">Status</th>
-                    <th className="text-right p-3 font-medium text-gray-500">Actions</th>
+                  <tr className="border-b border-gray-100 dark:border-gray-700">
+                    <th className="text-left p-3 font-medium text-gray-500 dark:text-gray-400">Invoice #</th>
+                    <th className="text-left p-3 font-medium text-gray-500 dark:text-gray-400">Shop</th>
+                    <th className="text-left p-3 font-medium text-gray-500 dark:text-gray-400">Customer</th>
+                    <th className="text-left p-3 font-medium text-gray-500 dark:text-gray-400">Date</th>
+                    <th className="text-right p-3 font-medium text-gray-500 dark:text-gray-400">Total</th>
+                    <th className="text-center p-3 font-medium text-gray-500 dark:text-gray-400">Status</th>
+                    <th className="text-right p-3 font-medium text-gray-500 dark:text-gray-400">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {data.invoices.map((inv) => (
-                    <tr key={inv.id} className="border-b border-gray-50 hover:bg-gray-50">
+                    <tr key={inv.id} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="p-3">
-                        <Link to={`/invoices/${inv.id}`} className="text-indigo-600 hover:underline font-medium">
+                        <Link to={`/invoices/${inv.id}`} className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">
                           {inv.invoice_number}
                         </Link>
                       </td>
-                      <td className="p-3 text-gray-600">{inv.shop_name}</td>
-                      <td className="p-3 text-gray-600">{inv.customer_name}</td>
-                      <td className="p-3 text-gray-600">{formatDate(inv.issue_date)}</td>
+                      <td className="p-3 text-gray-600 dark:text-gray-400">{inv.shop_name}</td>
+                      <td className="p-3 text-gray-600 dark:text-gray-400">{inv.customer_name}</td>
+                      <td className="p-3 text-gray-600 dark:text-gray-400">{formatDate(inv.issue_date)}</td>
                       <td className="p-3 text-right font-medium">{formatCurrency(inv.total)}</td>
                       <td className="p-3 text-center">
                         <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium uppercase ${statusColors[inv.status]}`}>
@@ -208,13 +210,13 @@ export default function InvoiceList() {
                       </td>
                       <td className="p-3">
                         <div className="flex gap-1 justify-end">
-                          <Link to={`/invoices/${inv.id}`} className="p-1.5 hover:bg-gray-100 rounded text-gray-400 hover:text-gray-600">
+                          <Link to={`/invoices/${inv.id}`} className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
                             <Eye size={15} />
                           </Link>
-                          <Link to={`/invoices/${inv.id}/edit`} className="p-1.5 hover:bg-gray-100 rounded text-gray-400 hover:text-gray-600">
+                          <Link to={`/invoices/${inv.id}/edit`} className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
                             <Pencil size={15} />
                           </Link>
-                          <button onClick={() => handleDelete(inv.id, inv.invoice_number)} className="p-1.5 hover:bg-red-50 rounded text-gray-400 hover:text-red-500">
+                          <button onClick={() => handleDelete(inv.id, inv.invoice_number)} className="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/30 rounded text-gray-400 hover:text-red-500">
                             <Trash2 size={15} />
                           </button>
                         </div>
@@ -226,29 +228,29 @@ export default function InvoiceList() {
             </div>
 
             {/* Mobile cards */}
-            <div className="md:hidden divide-y divide-gray-100">
+            <div className="md:hidden divide-y divide-gray-100 dark:divide-gray-700">
               {data.invoices.map((inv) => (
                 <div key={inv.id} className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <Link to={`/invoices/${inv.id}`} className="text-indigo-600 font-medium text-sm">
+                    <Link to={`/invoices/${inv.id}`} className="text-indigo-600 dark:text-indigo-400 font-medium text-sm">
                       {inv.invoice_number}
                     </Link>
                     <span className={`px-2 py-0.5 rounded-full text-xs font-medium uppercase ${statusColors[inv.status]}`}>
                       {inv.status}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-900 font-medium">{inv.customer_name}</p>
-                  <p className="text-xs text-gray-500">{inv.shop_name} &middot; {formatDate(inv.issue_date)}</p>
+                  <p className="text-sm text-gray-900 dark:text-gray-100 font-medium">{inv.customer_name}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{inv.shop_name} &middot; {formatDate(inv.issue_date)}</p>
                   <div className="flex items-center justify-between mt-2">
                     <span className="font-semibold">{formatCurrency(inv.total)}</span>
                     <div className="flex gap-1">
-                      <Link to={`/invoices/${inv.id}`} className="p-1.5 hover:bg-gray-100 rounded text-gray-400">
+                      <Link to={`/invoices/${inv.id}`} className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded text-gray-400">
                         <Eye size={15} />
                       </Link>
-                      <Link to={`/invoices/${inv.id}/edit`} className="p-1.5 hover:bg-gray-100 rounded text-gray-400">
+                      <Link to={`/invoices/${inv.id}/edit`} className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded text-gray-400">
                         <Pencil size={15} />
                       </Link>
-                      <button onClick={() => handleDelete(inv.id, inv.invoice_number)} className="p-1.5 hover:bg-red-50 rounded text-gray-400">
+                      <button onClick={() => handleDelete(inv.id, inv.invoice_number)} className="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/30 rounded text-gray-400">
                         <Trash2 size={15} />
                       </button>
                     </div>
@@ -259,22 +261,22 @@ export default function InvoiceList() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex items-center justify-between p-3 border-t border-gray-100">
-                <p className="text-sm text-gray-500">
+              <div className="flex items-center justify-between p-3 border-t border-gray-100 dark:border-gray-700">
+                <p className="text-sm text-gray-500 dark:text-gray-400">
                   Page {data.page} of {totalPages} ({data.total} total)
                 </p>
                 <div className="flex gap-1">
                   <button
                     disabled={page <= 1}
                     onClick={() => setPage(p => p - 1)}
-                    className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50"
+                    className="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50"
                   >
                     Prev
                   </button>
                   <button
                     disabled={page >= totalPages}
                     onClick={() => setPage(p => p + 1)}
-                    className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50"
+                    className="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50"
                   >
                     Next
                   </button>

@@ -104,16 +104,16 @@ export default function InvoiceForm({ invoice }: Props) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Shop & Invoice Number */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Invoice Details</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 md:p-6">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Invoice Details</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Shop *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Shop *</label>
             <select
               required
               value={shopId}
               onChange={(e) => setShopId(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value={0}>Select a shop</option>
               {shops?.map((s) => (
@@ -122,20 +122,20 @@ export default function InvoiceForm({ invoice }: Props) {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Invoice Number</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Invoice Number</label>
             <input
               type="text"
               readOnly
               value={invoice?.invoice_number || nextNumber?.invoice_number || 'Select a shop first'}
-              className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-500"
+              className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-600 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-500 dark:text-gray-400"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value as any)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value="draft">Draft</option>
               <option value="sent">Sent</option>
@@ -149,62 +149,62 @@ export default function InvoiceForm({ invoice }: Props) {
       </div>
 
       {/* Customer Info */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Customer Information</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 md:p-6">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Customer Information</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Customer Name *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Customer Name *</label>
             <input
               type="text"
               required
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="John Doe"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
             <input
               type="email"
               value={customerEmail}
               onChange={(e) => setCustomerEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone</label>
             <input
               type="text"
               value={customerPhone}
               onChange={(e) => setCustomerPhone(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Address</label>
             <input
               type="text"
               value={customerAddress}
               onChange={(e) => setCustomerAddress(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
         </div>
       </div>
 
       {/* Line Items */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Items</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 md:p-6">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Items</h2>
 
         {/* Desktop table */}
         <table className="hidden md:table w-full mb-3">
           <thead>
-            <tr className="border-b border-gray-200">
-              <th className="text-left p-2 text-sm font-medium text-gray-500">Description</th>
-              <th className="text-right p-2 text-sm font-medium text-gray-500 w-24">Qty</th>
-              <th className="text-right p-2 text-sm font-medium text-gray-500 w-32">Unit Price</th>
-              <th className="text-right p-2 text-sm font-medium text-gray-500 w-28">Amount</th>
+            <tr className="border-b border-gray-200 dark:border-gray-700">
+              <th className="text-left p-2 text-sm font-medium text-gray-500 dark:text-gray-400">Description</th>
+              <th className="text-right p-2 text-sm font-medium text-gray-500 dark:text-gray-400 w-24">Qty</th>
+              <th className="text-right p-2 text-sm font-medium text-gray-500 dark:text-gray-400 w-32">Unit Price</th>
+              <th className="text-right p-2 text-sm font-medium text-gray-500 dark:text-gray-400 w-28">Amount</th>
               <th className="w-10"></th>
             </tr>
           </thead>
@@ -225,14 +225,14 @@ export default function InvoiceForm({ invoice }: Props) {
         <button
           type="button"
           onClick={addItem}
-          className="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+          className="flex items-center gap-1 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium"
         >
           <Plus size={16} /> Add Item
         </button>
       </div>
 
       {/* Summary */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 md:p-6">
         <div className="max-w-md ml-auto">
           <InvoiceSummary
             subtotal={subtotal}
@@ -252,34 +252,34 @@ export default function InvoiceForm({ invoice }: Props) {
       </div>
 
       {/* Dates, Payment Terms, Notes */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Additional Details</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 md:p-6">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Additional Details</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Issue Date *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Issue Date *</label>
             <input
               type="date"
               required
               value={issueDate}
               onChange={(e) => setIssueDate(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Due Date</label>
             <input
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Payment Terms</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Payment Terms</label>
             <select
               value={paymentTermOptions.includes(paymentTerms) ? paymentTerms : paymentTerms ? 'Custom' : ''}
               onChange={(e) => setPaymentTerms(e.target.value === 'Custom' ? '' : e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value="">Select terms</option>
               {paymentTermOptions.map((t) => (
@@ -291,19 +291,19 @@ export default function InvoiceForm({ invoice }: Props) {
                 type="text"
                 value={paymentTerms}
                 onChange={(e) => setPaymentTerms(e.target.value)}
-                className="w-full mt-2 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full mt-2 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 placeholder="Custom payment terms"
               />
             )}
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Notes</label>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Thank you for your business!"
           />
         </div>
@@ -314,7 +314,7 @@ export default function InvoiceForm({ invoice }: Props) {
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="px-6 py-2.5 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50"
+          className="px-6 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
         >
           Cancel
         </button>
